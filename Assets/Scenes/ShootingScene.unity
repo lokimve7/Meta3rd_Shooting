@@ -258,7 +258,7 @@ MonoBehaviour:
   bulletFactory: {fileID: 5173560866044144784, guid: a8a36aa564cd4844b9569bcb8058a622, type: 3}
   firePos: {fileID: 1188138138}
   firePos2: {fileID: 438900436}
-  initBulletCnt: 6
+  initBulletCnt: 20
   magazine: []
 --- !u!1 &326722248
 GameObject:
@@ -276,7 +276,7 @@ GameObject:
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &326722249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +323,7 @@ GameObject:
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &329624515
 MonoBehaviour:
   m_ObjectHideFlags: 0

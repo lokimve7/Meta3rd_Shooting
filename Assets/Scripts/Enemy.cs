@@ -1,46 +1,49 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // ¼Ó·Â
+    // ì†ë ¥
     public float enemySpeed = 4;
 
-    // ÀÌµ¿ ¹æÇâ
+    // ì´ë™ ë°©í–¥
     Vector3 dir;
 
-    // ÇÃ·¹ÀÌ¾î
+    // í”Œë ˆì´ì–´
     public GameObject player;
+
+    // í­ë°œíš¨ê³¼ê³µì¥(Prefab)
+    public GameObject exploFactory;
 
     void Start()
     {
 
-        // ·£´ıÇÑ °ªÀ» »ÌÀÚ (0 ~ 9)
+        // ëœë¤í•œ ê°’ì„ ë½‘ì (0 ~ 9)
         int rand = Random.Range(0, 10);
        
-        // ¸¸¾à¿¡ ·£´ıÇÑ °ªÀÌ 4 º¸´Ù ÀÛÀ¸¸é (40% È®·ü)
+        // ë§Œì•½ì— ëœë¤í•œ ê°’ì´ 4 ë³´ë‹¤ ì‘ìœ¼ë©´ (40% í™•ë¥ )
         if(rand < 4)
         {
-            // ¹æÇâÀ» ¾Æ·¡·Î ÇÏÀÚ.
+            // ë°©í–¥ì„ ì•„ë˜ë¡œ í•˜ì.
             dir = Vector3.down;
         }
-        // ±×·¸Áö ¾ÊÀ¸¸é (³ª¸ÓÁö 60% È®·ü)
+        // ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ (ë‚˜ë¨¸ì§€ 60% í™•ë¥ )
         else
         {
-            // ÇÃ·¹ÀÌ¾î¸¦ Ã£ÀÚ
+            // í”Œë ˆì´ì–´ë¥¼ ì°¾ì
             player = GameObject.Find("Player");
 
-            // ¸¸¾à¿¡ player ¸¦ Àß Ã£¾Ò´Ù¸é
+            // ë§Œì•½ì— player ë¥¼ ì˜ ì°¾ì•˜ë‹¤ë©´
             if(player != null)
             {
-                // ÇÃ·¹ÀÌ¾î¸¦ ÇâÇÏ´Â ¹æÇâÀ» ±¸ÇÏÀÚ.
-                // 1. ÇÃ·¹ÀÌ¾î¸¦ ÇâÇÏ´Â ¹æÇâÀ» ±¸ÇÏÀÚ. (P - E)
+                // í”Œë ˆì´ì–´ë¥¼ í–¥í•˜ëŠ” ë°©í–¥ì„ êµ¬í•˜ì.
+                // 1. í”Œë ˆì´ì–´ë¥¼ í–¥í•˜ëŠ” ë°©í–¥ì„ êµ¬í•˜ì. (P - E)
                 dir = player.transform.position - transform.position;
-                // ±¸ÇÑ ¹æÇâÀÇ Å©±â¸¦ 1·Î ÇÏÀÚ (Á¤±ÔÈ­, Normalize)
+                // êµ¬í•œ ë°©í–¥ì˜ í¬ê¸°ë¥¼ 1ë¡œ í•˜ì (ì •ê·œí™”, Normalize)
                 dir.Normalize();
             }
-            // player ¸¦ ¸øÃ£¾Ò´Ù¸é
+            // player ë¥¼ ëª»ì°¾ì•˜ë‹¤ë©´
             //else
             //{
             //    dir = Vector3.down;
@@ -52,39 +55,46 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        // 2. ±× ¹æÇâÀ¸·Î ¿òÁ÷ÀÌ°í ½Í´Ù.
+        // 2. ê·¸ ë°©í–¥ìœ¼ë¡œ ì›€ì§ì´ê³  ì‹¶ë‹¤.
         transform.position += dir * enemySpeed * Time.deltaTime;
         
-        //¾Æ·¡·Î °è¼Ó ¿òÁ÷ÀÌ°í ½Í´Ù. 
-        // P = P0 + vt(v ¾Æ·¡)
+        //ì•„ë˜ë¡œ ê³„ì† ì›€ì§ì´ê³  ì‹¶ë‹¤. 
+        // P = P0 + vt(v ì•„ë˜)
         //transform.position += Vector3.down * enemySpeed * Time.deltaTime;
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
-
-        // ¸¸¾à¿¡ ºÎµúÈù ¿ÀºêÁ§Æ®ÀÌ 
+        // ë§Œì•½ì— ë¶€ë”ªíŒ ì˜¤ë¸Œì íŠ¸ì´ ì´ì•Œì´ë¼ë©´
         if(other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
-            // ºÎµúÈù ÃÑ¾Ë ºñÈ°¼ºÈ­
+            // ë¶€ë”ªíŒ ì´ì•Œ ë¹„í™œì„±í™”
             other.gameObject.SetActive(false);
-            //ÃÑ¾ËÀÌ¸é ÅºÃ¢¿¡ ³ÖÀÚ.
+            //ì´ì•Œì´ë©´ íƒ„ì°½ì— ë„£ì.
             GameObject player = GameObject.Find("Player");
             PlayerFire playerFire = player.GetComponent<PlayerFire>();
             playerFire.magazine.Add(other.gameObject);
+
+            // í­ë°œíš¨ê³¼ë¥¼ ìƒì„±í•˜ì.
+            GameObject explo = Instantiate(exploFactory);
+            // ìƒì„±ëœ í­ë°œíš¨ê³¼ë¥¼ ë‚˜ì˜ ìœ„ì¹˜ì— ë†“ì.
+            explo.transform.position = transform.position;
+            // ìƒì„±ëœ í­ë°œíš¨ê³¼ì—ì„œ ParticleSystem ì»´í¬ë„ŒíŠ¸ ê°€ì ¸ì˜¤ì.
+            ParticleSystem ps = explo.GetComponent<ParticleSystem>();
+            // ê°€ì ¸ì˜¨ ì»´í¬ë„ŒíŠ¸ë¥¼ Play í•˜ì.
+            ps.Play();
         }
-        // ±×·¸Áö ¾Ê°í ¸¸¾à¿¡ ºÎµúÈù ¿ÀºêÁ§Æ®ÀÇ ÀÌ¸§ÀÌ DestroyZone À» Æ÷ÇÔÇÏ°í ÀÖÁö ¾Ê´Ù¸é
+        // ê·¸ë ‡ì§€ ì•Šê³  ë§Œì•½ì— ë¶€ë”ªíŒ ì˜¤ë¸Œì íŠ¸ì˜ ì´ë¦„ì´ DestroyZone ì„ í¬í•¨í•˜ê³  ìˆì§€ ì•Šë‹¤ë©´
         else if (other.gameObject.name.Contains("Destroy") == false)
         {
-            // ºÎµúÈù ¿ÀºêÁ§Æ® ¾ø¾ÖÀÚ
+            // ë¶€ë”ªíŒ ì˜¤ë¸Œì íŠ¸ ì—†ì• ì
         
             Destroy(other.gameObject);
         }
         
        
-        // ³ª¸¦ ¾ø¾ÖÀÚ
+        // ë‚˜ë¥¼ ì—†ì• ì
         Destroy(gameObject);
     }
 }

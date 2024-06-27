@@ -1,20 +1,20 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ÁÖ¼®: Ctrl ´©¸¥»óÅÂ·Î K->C
-// ÁÖ¼® Ç®±â : Ctrl ´©¸¥»óÅÂ·Î K -> U
-// ÄÚµå Á¤·Ä : Ctrl ´©¸¥»óÅÂ·Î K -> F
+// ì£¼ì„: Ctrl ëˆ„ë¥¸ìƒíƒœë¡œ K->C
+// ì£¼ì„ í’€ê¸° : Ctrl ëˆ„ë¥¸ìƒíƒœë¡œ K -> U
+// ì½”ë“œ ì •ë ¬ : Ctrl ëˆ„ë¥¸ìƒíƒœë¡œ K -> F
 
 /*
- »ç¿ëÀÚÀÇ ÀÔ·ÂÀ» ¹Ş¾Æ¼­ ÀÌµ¿¹æÇâÀ» Á¤ÇÏ°í
-±× ¹æÇâÀ¸·Î ¿òÁ÷ÀÌ°í ½Í´Ù.
+ ì‚¬ìš©ìì˜ ì…ë ¥ì„ ë°›ì•„ì„œ ì´ë™ë°©í–¥ì„ ì •í•˜ê³ 
+ê·¸ ë°©í–¥ìœ¼ë¡œ ì›€ì§ì´ê³  ì‹¶ë‹¤.
  */
 
 
 public class PlayerMove : MonoBehaviour
 {
-    // ÀÌµ¿ ¼Ó·Â
+    // ì´ë™ ì†ë ¥
     public float moveSpeed = 5;    
 
     void Start()
@@ -23,28 +23,28 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        //1.»ç¿ëÀÚÀÇ ÀÔ·ÂÀ» ¹ŞÀÚ(w, a, s, d)
-        // a : -1, d : 1, ´©¸£Áö ¾ÊÀ¸¸é : 0
+        //1.ì‚¬ìš©ìì˜ ì…ë ¥ì„ ë°›ì(w, a, s, d)
+        // a : -1, d : 1, ëˆ„ë¥´ì§€ ì•Šìœ¼ë©´ : 0
         float h = Input.GetAxis("Horizontal");
-        // w : 1, s : -1, ´©¸£Áö ¾ÊÀ¸¸é : 0
+        // w : 1, s : -1, ëˆ„ë¥´ì§€ ì•Šìœ¼ë©´ : 0
         float v = Input.GetAxis("Vertical");
 
-        //2.ÀÔ·Â ¹ŞÀ» °ªÀ» ÀÌ¿ëÇØ¼­ ÀÌµ¿¹æÇâÀ» Á¤ÇÏÀÚ.
+        //2.ì…ë ¥ ë°›ì„ ê°’ì„ ì´ìš©í•´ì„œ ì´ë™ë°©í–¥ì„ ì •í•˜ì.
         Vector3 dirH = Vector3.right * h;
         Vector3 dirV = Vector3.up * v;
         Vector3 dir = dirH + dirV;
 
-        // dir ÀÇ Å©±â¸¦ 1·Î ¸¸µéÀÚ.
+        // dir ì˜ í¬ê¸°ë¥¼ 1ë¡œ ë§Œë“¤ì.
         dir.Normalize();
 
-        //3.±¸ÇØÁø ÀÌµ¿¹æÇâÀ¸·Î ¿òÁ÷ÀÌÀÚ. (¼Ó·Â 5)
+        //3.êµ¬í•´ì§„ ì´ë™ë°©í–¥ìœ¼ë¡œ ì›€ì§ì´ì. (ì†ë ¥ 5)
         //transform.Translate(dir * moveSpeed * Time.deltaTime);
-        // ÀÌµ¿ °ø½Ä (P = P0 + vt)
+        // ì´ë™ ê³µì‹ (P = P0 + vt)
         //transform.position = transform.position + dir * moveSpeed * Time.deltaTime;
         transform.position += dir * moveSpeed * Time.deltaTime;
 
 
-        // 1. ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿ÇÏ°í½Í´Ù.
+        // 1. ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™í•˜ê³ ì‹¶ë‹¤.
         // transform.Translate(Vector3.right * 5 * Time.deltaTime); 
     }
 }

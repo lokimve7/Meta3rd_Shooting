@@ -1,38 +1,39 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    // Enemy °øÀå
+
+    // Enemy ê³µì¥
     public GameObject enemyFactory;
 
-    // »ı¼º½Ã°£(±âÁØ½Ã°£)
+    // ìƒì„±ì‹œê°„(ê¸°ì¤€ì‹œê°„)
     public float createTime = 0;
-    // ÇöÀç½Ã°£(´©Àû½Ã°£)
+    // í˜„ì¬ì‹œê°„(ëˆ„ì ì‹œê°„)
     public float currTime = 0;
    
     void Start()
     {
-        // »ı¼º½Ã°£À» ·£´ıÇÑ °ªÀ¸·Î ¼³Á¤ (0.5 ~ 1.5)
+        // ìƒì„±ì‹œê°„ì„ ëœë¤í•œ ê°’ìœ¼ë¡œ ì„¤ì • (0.5 ~ 1.5)
         createTime = Random.Range(0.5f, 1.5f);
     }
 
     void Update()
     {
-        // ½Ã°£À» Èå¸£°Ô ÇÏÀÚ(DeltaTime ´©Àû)
+        // ì‹œê°„ì„ íë¥´ê²Œ í•˜ì(DeltaTime ëˆ„ì )
         currTime += Time.deltaTime;
 
-        // ¸¸¾à¿¡ 1ÃÊ°¡ Áö³µ´Ù¸é (ÇöÀç½Ã°£ > »ı¼º½Ã°£ )
+        // ë§Œì•½ì— 1ì´ˆê°€ ì§€ë‚¬ë‹¤ë©´ (í˜„ì¬ì‹œê°„ > ìƒì„±ì‹œê°„ )
         if (currTime > createTime)
         {           
-            // Enemy ¸¦ ÇÏ³ª »ı¼ºÇÏÀÚ.
+            // Enemy ë¥¼ í•˜ë‚˜ ìƒì„±í•˜ì.
             GameObject enemy = Instantiate(enemyFactory);
-            // »ı¼ºµÈ Enemy¸¦ ³ªÀÇ À§Ä¡¿¡ ³õÀÚ.
+            // ìƒì„±ëœ Enemyë¥¼ ë‚˜ì˜ ìœ„ì¹˜ì— ë†“ì.
             enemy.transform.position = transform.position;
-            // ÇöÀç½Ã°£À» ÃÊ±âÈ­
+            // í˜„ì¬ì‹œê°„ì„ ì´ˆê¸°í™”
             currTime = 0;
-            // »ı¼º½Ã°£À» ·£´ıÇÑ °ªÀ¸·Î ¼³Á¤ (0.5 ~ 1.5)
+            // ìƒì„±ì‹œê°„ì„ ëœë¤í•œ ê°’ìœ¼ë¡œ ì„¤ì • (0.5 ~ 1.5)
             createTime = Random.Range(0.5f, 1.5f);
         }
     }

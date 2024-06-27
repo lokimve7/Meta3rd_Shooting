@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,53 +6,74 @@ using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
-    // ÃÑ¾Ë°øÀå(Prefab)
+
+    // ì´ì•Œê³µì¥(Prefab)
     public GameObject bulletFactory;
-    // ÃÑ±¸
+    // ì´êµ¬
     public GameObject firePos;
     public GameObject firePos2;
 
-    // ÃÊ±â ÃÑ¾Ë °¹¼ö
+    // ì´ˆê¸° ì´ì•Œ ê°¯ìˆ˜
     public int initBulletCnt = 6;
-    // ÃÑ¾Ë ÅºÃ¢
+    // ì´ì•Œ íƒ„ì°½
     public List<GameObject> magazine = new List<GameObject>();
+  
 
     void Start()
-    {        
-        // ÃÑ¾Ë 6°³ ¸¸µéÀÚ
-        for(int i = 0; i < initBulletCnt; i++)
+    {
+        #region List ì‚¬ìš©ë²•
+        // ë¦¬ìŠ¤íŠ¸ ë³€ìˆ˜ ìƒì„±
+        List<string> listStr = new List<string>();
+
+        // ì¶”ê°€
+        listStr.Add("one"); //0
+        listStr.Add("two"); //1
+
+        print(listStr[1]);
+
+        // ì‚½ì…
+        listStr.Insert(1, "1.5");   // one, 1.5, two
+
+        // ì‚­ì œ
+        listStr.Remove("one");      // 1.5, two
+        listStr.RemoveAt(1);        // 1.5
+        #endregion
+
+        // ì´ì•Œ 6ê°œ ë§Œë“¤ì
+        for (int i = 0; i < initBulletCnt; i++)
         {
             GameObject bullet = Instantiate(bulletFactory);
 
-            // ¸¸µé¾îÁø ÃÑ¾ËÀ» ºñÈ°¼ºÈ­ ÇÏÀÚ.
+            // ë§Œë“¤ì–´ì§„ ì´ì•Œì„ ë¹„í™œì„±í™” í•˜ì.
             bullet.SetActive(false);
 
-            // ÃÑ¾ËÀ» ÅºÃ¢¿¡ ³ÖÀÚ
+            // ì´ì•Œì„ íƒ„ì°½ì— ë„£ì
             magazine.Add(bullet);            
         }
+
     }
 
     void Update()
     {
-        // 1. ¸¶¿ì½º ¿ŞÂÊ¹öÆ°À» ´©¸£¸é 
+        // 1. ë§ˆìš°ìŠ¤ ì™¼ìª½ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ 
         // bool isClick = Input.GetButtonDown("Fire1");
         if(Input.GetButtonDown("Fire1"))
         //if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftControl))
         {
-            // ÅºÃ¢¿¡¼­ ÃÑ¾ËÀ» °¡Á®¿ÀÀÚ.
+            // íƒ„ì°½ì—ì„œ ì´ì•Œì„ ê°€ì ¸ì˜¤ì.
             GameObject bullet = magazine[0];
-            // °¡Á®¿Â ÃÑ¾ËÀ» ÃÑ±¸¿¡ ³õÀÚ
+            // ê°€ì ¸ì˜¨ ì´ì•Œì„ ì´êµ¬ì— ë†“ì
             bullet.transform.position = firePos.transform.position;
-            // °¡Á®¿Â ÃÑ¾ËÀ» È°¼ºÈ­ ÇÏÀÚ.
+            // ê°€ì ¸ì˜¨ ì´ì•Œì„ í™œì„±í™” í•˜ì.
             bullet.SetActive(true);
-            // ÅºÃ»¿¡¼­ °¡Á®¿Â ÃÑ¾ËÀ» »©ÀÚ.
+            // íƒ„ì²­ì—ì„œ ê°€ì ¸ì˜¨ ì´ì•Œì„ ë¹¼ì.
             magazine.RemoveAt(0);
 
-            #region ÇÏ³ªÇÏ³ª ÃÑ¾ËÀ» »ı¼ºÇÏ´Â ¹æ¹ı
-            //// 2. ÃÑ¾Ë°øÀå(Prefab) ¿¡¼­ ÃÑ¾ËÀ» »ı¼ºÇÏÀÚ.
+            #region í•˜ë‚˜í•˜ë‚˜ ì´ì•Œì„ ìƒì„±í•˜ëŠ” ë°©ë²•
+            //// 2. ì´ì•Œê³µì¥(Prefab) ì—ì„œ ì´ì•Œì„ ìƒì„±í•˜ì.
             //GameObject bullet = Instantiate(bulletFactory);
 
-            //// 3. »ı¼ºµÈ ÃÑ¾ËÀÇ À§Ä¡¸¦ ÃÑ±¸ À§Ä¡¿¡ ³õÀÚ.
+            //// 3. ìƒì„±ëœ ì´ì•Œì˜ ìœ„ì¹˜ë¥¼ ì´êµ¬ ìœ„ì¹˜ì— ë†“ì.
             //bullet.transform.position = firePos.transform.position;
             ////bullet.transform.position = transform.position + new Vector3(0, 1, 0);
 
@@ -63,4 +84,6 @@ public class PlayerFire : MonoBehaviour
 
         }
     }
+
+    
 }

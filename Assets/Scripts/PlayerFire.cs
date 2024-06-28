@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
-
     // 총알공장(Prefab)
     public GameObject bulletFactory;
     // 총구
@@ -14,10 +13,11 @@ public class PlayerFire : MonoBehaviour
     public GameObject firePos2;
 
     // 초기 총알 갯수
-    public int initBulletCnt = 6;
+    public int initBulletCnt = 5;
     // 총알 탄창
     public List<GameObject> magazine = new List<GameObject>();
-  
+
+    
 
     void Start()
     {
@@ -53,13 +53,25 @@ public class PlayerFire : MonoBehaviour
 
     }
 
+    // 현재시간
+    float currTime;
+
     void Update()
     {
-        // 1. 마우스 왼쪽버튼을 누르면 
-        // bool isClick = Input.GetButtonDown("Fire1");
-        if(Input.GetButtonDown("Fire1"))
-        //if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftControl))
+        //// 1. 마우스 왼쪽버튼을 누르면 
+        //// bool isClick = Input.GetButtonDown("Fire1");
+        //if(Input.GetButtonDown("Fire1"))
+        ////if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftControl))
+        
+        // 0.5초 마다 한번씩 총알 발사하고 싶다.
+        // 현재시간을 누적하자.
+        currTime += Time.deltaTime;
+        // 만약에 현재시간이 0.5보다 커지면
+        if (currTime > 0.2f)
         {
+            // 현재시간을 초기화
+            currTime = 0;
+
             // 탄창에서 총알을 가져오자.
             GameObject bullet = magazine[0];
             // 가져온 총알을 총구에 놓자
@@ -67,7 +79,7 @@ public class PlayerFire : MonoBehaviour
             // 가져온 총알을 활성화 하자.
             bullet.SetActive(true);
             // 탄청에서 가져온 총알을 빼자.
-            magazine.RemoveAt(0);
+            magazine.RemoveAt(0);           
 
             #region 하나하나 총알을 생성하는 방법
             //// 2. 총알공장(Prefab) 에서 총알을 생성하자.
@@ -81,7 +93,6 @@ public class PlayerFire : MonoBehaviour
 
             //bullet2.transform.position = firePos2.transform.position;
             #endregion
-
         }
     }
 

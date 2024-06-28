@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour
     // 폭발효과공장(Prefab)
     public GameObject exploFactory;
 
+    // 모양의 Transform
+    public Transform trModel;
+
     void Start()
     {
         // 랜덤한 값을 뽑자 (0 ~ 9)
@@ -48,7 +51,10 @@ public class Enemy : MonoBehaviour
             //    dir = Vector3.down;
             //}
         }
-        Destroy(gameObject, 10);
+
+        // 모양의 윗방향을 dir 로 셋팅
+        trModel.rotation = Quaternion.LookRotation(Vector3.back, dir);
+        //trModel.up = dir;
     }
 
     void Update()

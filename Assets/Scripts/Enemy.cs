@@ -18,7 +18,6 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-
         // 랜덤한 값을 뽑자 (0 ~ 9)
         int rand = Random.Range(0, 10);
        
@@ -49,7 +48,6 @@ public class Enemy : MonoBehaviour
             //    dir = Vector3.down;
             //}
         }
-
         Destroy(gameObject, 10);
     }
 

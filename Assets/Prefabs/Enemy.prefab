@@ -125,6 +125,7 @@ MonoBehaviour:
   enemySpeed: 4
   player: {fileID: 0}
   exploFactory: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
+  go: {fileID: 6938610244401031808}
 --- !u!54 &-1865846468530436915
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -225,6 +226,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 008c3501136b2ca48bfdedcedd499d74, type: 3}
+--- !u!1 &6938610244401031808 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 008c3501136b2ca48bfdedcedd499d74, type: 3}
+  m_PrefabInstance: {fileID: 6938610244401064992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6938610244401460896 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 008c3501136b2ca48bfdedcedd499d74, type: 3}

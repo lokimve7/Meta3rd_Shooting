@@ -80,6 +80,8 @@ public class PlayerFire : MonoBehaviour
                 bullet = magazine[0];
                 // 가져온 총알을 총구에 놓자
                 bullet.transform.position = firePos.transform.position;
+                // 나의 윗방향을 총알의 윗뱡향으로 하자.
+                bullet.transform.up = transform.up;
                 // 가져온 총알을 활성화 하자.
                 bullet.SetActive(true);
                 // 탄청에서 가져온 총알을 빼자.
@@ -95,6 +97,8 @@ public class PlayerFire : MonoBehaviour
                 // 3. 생성된 총알의 위치를 총구 위치에 놓자.
                 bullet.transform.position = firePos.transform.position;
                 //bullet.transform.position = transform.position + new Vector3(0, 1, 0);               
+                // 나의 윗방향을 총알의 윗뱡향으로 하자.
+                bullet.transform.up = transform.up;
                 #endregion
             }
 

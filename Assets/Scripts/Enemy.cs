@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
     }
 
     void Update()
-    {
+    {     
         // 2. 그 방향으로 움직이고 싶다.
         transform.position += dir * enemySpeed * Time.deltaTime;
         
@@ -100,5 +100,5 @@ public class Enemy : MonoBehaviour
        
         // 나를 없애자
         Destroy(gameObject);
-    }
+    }    
 }

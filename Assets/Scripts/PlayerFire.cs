@@ -50,23 +50,33 @@ public class PlayerFire : MonoBehaviour
             // 총알을 탄창에 넣자
             magazine.Add(bullet);            
         }
+
+            
     }
 
     // 현재시간
     float currTime;
+    // 현재시간2
+    float currTime2;
+    // 회전 총알 갯수
+    public int rotBulletCnt = 20;
+    // 총알 발사 시작
+    bool isFire;
+    // 발사된 총알 갯수
+    int firedBullet;
 
     void Update()
     {
         //// 1. 마우스 왼쪽버튼을 누르면 
         //// bool isClick = Input.GetButtonDown("Fire1");
-        //if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown("Fire1"))
         ////if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftControl))
         
         // 0.5초 마다 한번씩 총알 발사하고 싶다.
         // 현재시간을 누적하자.
-        currTime += Time.deltaTime;
+        //currTime += Time.deltaTime;
         // 만약에 현재시간이 0.2보다 커지면
-        if (currTime > 0.2f)
+        //if (currTime > 0.2f)
         {
             // 현재시간을 초기화
             currTime = 0;
@@ -107,5 +117,42 @@ public class PlayerFire : MonoBehaviour
             // 가져온 컴포넌트로 PlaySound 함수 실행
             bulletComp.PlaySound();
         }
+
+        if(Input.GetButtonDown("Fire2"))
+        {
+            isFire = true;
+        }
+
+        // 총알을 발사할 수 있다면
+        if(isFire == true)
+        {
+            // 0.5초 마다 한번씩 총알을 발사 (회전총알)
+            currTime2 += Time.deltaTime;
+            if (currTime2 > 0.1f)
+            {
+                // 총알을 하나 만들자.
+                GameObject b = Instantiate(bulletFactory);
+                // firePos 를 z축으로 (360 / rotBulletCnt) 도 회전시키자
+                firePos.transform.Rotate(0, 0, 360.0f / rotBulletCnt);
+                // 만들어진 총알의 up 방향을 firePos 의 up 방향으로 하자.
+                b.transform.up = firePos.transform.up;
+                // firePos 의 up 방향으로 1.5 떨어지 위치를 계산하자.
+                // 계산된 위치로 생성된 총알을 배치하자.
+                b.transform.position = transform.position + firePos.transform.up * 1.5f;
+
+                currTime2 = 0;
+
+                // 발사된 총알 갯수 증가
+                firedBullet++;
+                // 만약에 발사된 총알이 8개라면
+                if(firedBullet == rotBulletCnt)
+                {
+                    // 총알 못쏘게 하자.
+                    isFire = false;
+                    // 발사된 총알 갯수 초기화
+                    firedBullet = 0;
+                }
+            }
+        }       
     }
 }

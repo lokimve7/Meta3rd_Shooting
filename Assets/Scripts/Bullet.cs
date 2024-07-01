@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
     {
         // 위로 계속 올라가고 싶다. (P = P0 + vt)
         transform.position += transform.up * moveSpeed * Time.deltaTime;
+        //transform.Translate(transform.up * moveSpeed * Time.deltaTime, Space.World);
     }
        
     public void PlaySound()

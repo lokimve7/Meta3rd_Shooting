@@ -78,44 +78,7 @@ public class PlayerFire : MonoBehaviour
         // 만약에 현재시간이 0.2보다 커지면
         //if (currTime > 0.2f)
         {
-            // 현재시간을 초기화
-            currTime = 0;
-
-            GameObject bullet;
-
-            // 만약에 탄창에 총알이 있다면
-            if (magazine.Count > 0)
-            {
-                // 탄창에서 총알을 가져오자.
-                bullet = magazine[0];
-                // 가져온 총알을 총구에 놓자
-                bullet.transform.position = firePos.transform.position;
-                // 나의 윗방향을 총알의 윗뱡향으로 하자.
-                bullet.transform.up = transform.up;
-                // 가져온 총알을 활성화 하자.
-                bullet.SetActive(true);
-                // 탄청에서 가져온 총알을 빼자.
-                magazine.RemoveAt(0);                
-            }            
-            // 그렇지 않으면 (탄창에 총알이 없다면)
-            else
-            {
-                #region 하나하나 총알을 생성하는 방법
-                // 2. 총알공장(Prefab) 에서 총알을 생성하자.
-                bullet = Instantiate(bulletFactory);
-
-                // 3. 생성된 총알의 위치를 총구 위치에 놓자.
-                bullet.transform.position = firePos.transform.position;
-                //bullet.transform.position = transform.position + new Vector3(0, 1, 0);               
-                // 나의 윗방향을 총알의 윗뱡향으로 하자.
-                bullet.transform.up = transform.up;
-                #endregion
-            }
-
-            // Bullet 컴포넌트를 가져오자.
-            Bullet bulletComp = bullet.GetComponent<Bullet>();
-            // 가져온 컴포넌트로 PlaySound 함수 실행
-            bulletComp.PlaySound();
+            FireForward();
         }
 
         if(Input.GetButtonDown("Fire2"))
@@ -123,29 +86,55 @@ public class PlayerFire : MonoBehaviour
             isFire = true;
         }
 
+        Fire360();              
+    }
+
+    // 가는 방향으로 발사되는 총알 생성하는 함수
+    void FireForward()
+    {
+        // 현재시간을 초기화
+        currTime = 0;
+
+        GameObject bullet = GetBullet();        
+
+        // 3. 생성된 총알의 위치를 총구 위치에 놓자.
+        bullet.transform.position = firePos.transform.position;
+        //bullet.transform.position = transform.position + new Vector3(0, 1, 0);               
+        // 나의 윗방향을 총알의 윗뱡향으로 하자.
+        bullet.transform.up = transform.up;
+
+        // Bullet 컴포넌트를 가져오자.
+        Bullet bulletComp = bullet.GetComponent<Bullet>();
+        // 가져온 컴포넌트로 PlaySound 함수 실행
+        bulletComp.PlaySound();
+    }
+
+    // 360 방향으로 발사되는 총알 생성하는 함수
+    void Fire360()
+    {
         // 총알을 발사할 수 있다면
-        if(isFire == true)
+        if (isFire == true)
         {
             // 0.5초 마다 한번씩 총알을 발사 (회전총알)
             currTime2 += Time.deltaTime;
             if (currTime2 > 0.1f)
             {
-                // 총알을 하나 만들자.
-                GameObject b = Instantiate(bulletFactory);
+                GameObject bullet = GetBullet();                
+
                 // firePos 를 z축으로 (360 / rotBulletCnt) 도 회전시키자
                 firePos.transform.Rotate(0, 0, 360.0f / rotBulletCnt);
                 // 만들어진 총알의 up 방향을 firePos 의 up 방향으로 하자.
-                b.transform.up = firePos.transform.up;
+                bullet.transform.up = firePos.transform.up;
                 // firePos 의 up 방향으로 1.5 떨어지 위치를 계산하자.
                 // 계산된 위치로 생성된 총알을 배치하자.
-                b.transform.position = transform.position + firePos.transform.up * 1.5f;
+                bullet.transform.position = transform.position + firePos.transform.up * 1.5f;
 
                 currTime2 = 0;
 
                 // 발사된 총알 갯수 증가
                 firedBullet++;
                 // 만약에 발사된 총알이 8개라면
-                if(firedBullet == rotBulletCnt)
+                if (firedBullet == rotBulletCnt)
                 {
                     // 총알 못쏘게 하자.
                     isFire = false;
@@ -153,6 +142,30 @@ public class PlayerFire : MonoBehaviour
                     firedBullet = 0;
                 }
             }
-        }       
+        }
+    }
+
+
+    GameObject GetBullet()
+    {
+        GameObject bullet = null;
+        // 만약에 탄창에 총알이 있다면
+        if (magazine.Count > 0)
+        {
+            // 탄창에서 총알을 하나 가져오자.
+            bullet = magazine[0];
+            // 가져온 총알을 활성화 하자.
+            bullet.SetActive(true);
+            // 탄창에서 해당 총알을 빼자.
+            magazine.RemoveAt(0);
+        }
+        // 탄창에 총알이 없다면
+        else
+        {
+            // 총알을 하나 만들자.
+            bullet = Instantiate(bulletFactory);
+        }
+
+        return bullet;
     }
 }

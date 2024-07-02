@@ -88,6 +88,15 @@ public class Enemy : MonoBehaviour
             ParticleSystem ps = explo.GetComponent<ParticleSystem>();
             // 가져온 컴포넌트를 Play 하자.
             ps.Play();
+
+
+            //// ScoreManager 게임오브젝트 찾자.
+            //GameObject goSM = GameObject.Find("ScoreManager");
+            //// 찾은 오브젝트가 가지고 있는 ScoreManager 컴포넌트 가져오자.
+            //ScoreManager sm = goSM.GetComponent<ScoreManager>();
+            //// 가져온 컴포넌트가 가지고 있는 AddScore 함수를 실행.
+            //sm.AddScore(10);
+            ScoreManager.instance.AddScore(10);
         }
         // 그렇지 않고 만약에 부딪힌 오브젝트의 이름이 DestroyZone 을 포함하고 있지 않다면
         else if (other.gameObject.name.Contains("Destroy") == false)

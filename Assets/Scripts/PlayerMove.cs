@@ -22,6 +22,8 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
+        HP hp = GetComponent<HP>();
+        hp.OnDie = OnDie;
     }
 
     void Update()
@@ -39,6 +41,23 @@ public class PlayerMove : MonoBehaviour
             // 너의 up 방향으로 움직이고 싶다.
             transform.position += transform.up * moveSpeed * Time.deltaTime;
         }
+
+        Vector3 playerPos = transform.position;
+        playerPos.x -= 0.5f;
+        playerPos.y -= 0.5f;
+        Vector3 viewportPoint = Camera.main.WorldToViewportPoint(playerPos);
+
+        playerPos = transform.position;
+        playerPos.x += 0.5f;
+        playerPos.y += 0.5f;
+        Vector3 viewportPoint2 = Camera.main.WorldToViewportPoint(playerPos);
+
+        if (viewportPoint.x < 0 || viewportPoint.y < 0 ||
+            viewportPoint2.x > 1 || viewportPoint2.y > 1)
+        {
+            transform.position -= transform.up * moveSpeed * Time.deltaTime;
+        }
+
         #endregion  
 
         #region  키보드 입력 방향으로 움직이기
@@ -66,12 +85,18 @@ public class PlayerMove : MonoBehaviour
         //// 1. 오른쪽으로 이동하고싶다.
         //// transform.Translate(Vector3.right * 5 * Time.deltaTime); 
         #endregion
+
+
     }
  
     // 게임오브젝트가 파괴될 때 호출되는 함수
     private void OnDestroy()
     {
         // 게임오버 화면으로 전환
+    }
+
+    void OnDie()
+    {
         SceneManager.LoadScene("GameOverScene");
     }
 }

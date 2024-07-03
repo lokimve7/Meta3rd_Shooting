@@ -99,6 +99,11 @@ public class Enemy : MonoBehaviour
             ScoreManager.instance.CurrScore = 10;
       
         }
+        else if(other.gameObject.name.Contains("Player"))
+        {
+            HP hp = other.GetComponent<HP>();
+            hp.UpdateHP(-1);
+        }
         // 그렇지 않고 만약에 부딪힌 오브젝트의 이름이 DestroyZone 을 포함하고 있지 않다면
         else if (other.gameObject.name.Contains("Destroy") == false)
         {

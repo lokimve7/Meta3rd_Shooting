@@ -103,10 +103,12 @@ public class PlayerFire : MonoBehaviour
         // 나의 윗방향을 총알의 윗뱡향으로 하자.
         bullet.transform.up = transform.up;
 
-        // Bullet 컴포넌트를 가져오자.
-        Bullet bulletComp = bullet.GetComponent<Bullet>();
-        // 가져온 컴포넌트로 PlaySound 함수 실행
-        bulletComp.PlaySound();
+        //// Bullet 컴포넌트를 가져오자.
+        //Bullet bulletComp = bullet.GetComponent<Bullet>();
+        //// 가져온 컴포넌트로 PlaySound 함수 실행
+        //bulletComp.PlaySound();
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(audioSource.clip);
     }
 
     // 360 방향으로 발사되는 총알 생성하는 함수

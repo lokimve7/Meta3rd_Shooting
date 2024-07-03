@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // 주석: Ctrl 누른상태로 K->C
 // 주석 풀기 : Ctrl 누른상태로 K -> U
@@ -65,5 +66,12 @@ public class PlayerMove : MonoBehaviour
         //// 1. 오른쪽으로 이동하고싶다.
         //// transform.Translate(Vector3.right * 5 * Time.deltaTime); 
         #endregion
+    }
+ 
+    // 게임오브젝트가 파괴될 때 호출되는 함수
+    private void OnDestroy()
+    {
+        // 게임오버 화면으로 전환
+        SceneManager.LoadScene("GameOverScene");
     }
 }

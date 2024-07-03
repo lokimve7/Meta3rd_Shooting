@@ -96,7 +96,8 @@ public class Enemy : MonoBehaviour
             //ScoreManager sm = goSM.GetComponent<ScoreManager>();
             //// 가져온 컴포넌트가 가지고 있는 AddScore 함수를 실행.
             //sm.AddScore(10);
-            ScoreManager.instance.AddScore(10);
+            ScoreManager.instance.CurrScore = 10;
+      
         }
         // 그렇지 않고 만약에 부딪힌 오브젝트의 이름이 DestroyZone 을 포함하고 있지 않다면
         else if (other.gameObject.name.Contains("Destroy") == false)

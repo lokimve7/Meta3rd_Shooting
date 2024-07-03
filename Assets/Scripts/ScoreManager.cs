@@ -10,17 +10,32 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
 
     // 현재 점수
-    public int currScore;
+    int currScore;
+    public int CurrScore
+    {
+        get { return currScore; }
+        set { AddScore(value); }
+    }
+
     // 현재 점수 UI
     public Text textCurrScore;
 
     // 최고 점수
-    public int bestScore;
+    int bestScore;
+    public int BestScore
+    {
+        get { return bestScore; }
+        set {
+            bestScore = value;
+            textBestScore.text = "최고 점수 : " + bestScore;
+        }
+    }
     // 최고 점수 UI
     public Text textBestScore;
 
+
     private void Awake()
-    {
+    {        
         // 만약에 instance 값이 없다면
         if(instance == null)
         {
@@ -37,7 +52,11 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        
+        //// 저장되어 있는 최고점수를 bestScore 에 셋팅
+        //bestScore = PlayerPrefs.GetInt("BEST_SCORE", 0);
+        //// 최고 점수 UI 갱신
+        //textBestScore.text = "최고 점수 : " + bestScore;
+        BestScore = PlayerPrefs.GetInt("BEST_SCORE", 0);
     }
 
     void Update()
@@ -46,7 +65,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     // 점수 증가시키는 함수
-    public void AddScore(int addValue)
+    void AddScore(int addValue)
     {
         // 현재 점수를 addValue 만큼 증시키자.
         currScore += addValue;
@@ -57,15 +76,19 @@ public class ScoreManager : MonoBehaviour
         // 만약에 현재 점수가 최고 점수를 넘었니?
         if(currScore > bestScore)
         {
-            // 최고 점수를 현재 점수로 셋팅
-            bestScore = currScore;
-            // 최고 점수 UI 를 갱신시키자.
-            textBestScore.text = "최고 점수 : " + bestScore;
+            //// 최고 점수를 현재 점수로 셋팅
+            //bestScore = currScore;
+            //// 최고 점수 UI 를 갱신시키자.
+            //textBestScore.text = "최고 점수 : " + bestScore;
+
+            BestScore = currScore;
+
+            // 최고 점수를 저장하자.
+            PlayerPrefs.SetInt("BEST_SCORE", bestScore);
         }
         
         //Debug.Log("");
         //Debug.LogWarning("");
         //Debug.LogError("");
-    }
-    
+    }    
 }

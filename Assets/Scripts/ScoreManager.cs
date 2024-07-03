@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class ScoreManager : MonoBehaviour
 
     // 현재 점수
     public int currScore;
+    // 현재 점수 UI
+    public Text textCurrScore;
+
+    // 최고 점수
+    public int bestScore;
+    // 최고 점수 UI
+    public Text textBestScore;
 
     private void Awake()
     {
@@ -43,7 +51,18 @@ public class ScoreManager : MonoBehaviour
         // 현재 점수를 addValue 만큼 증시키자.
         currScore += addValue;
 
-        print("현재 점수 : " + currScore);
+        // 현재 점수 UI 를 갱신시키자.
+        textCurrScore.text = "현재 점수 : " + currScore;
+
+        // 만약에 현재 점수가 최고 점수를 넘었니?
+        if(currScore > bestScore)
+        {
+            // 최고 점수를 현재 점수로 셋팅
+            bestScore = currScore;
+            // 최고 점수 UI 를 갱신시키자.
+            textBestScore.text = "최고 점수 : " + bestScore;
+        }
+        
         //Debug.Log("");
         //Debug.LogWarning("");
         //Debug.LogError("");

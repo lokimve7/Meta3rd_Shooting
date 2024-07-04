@@ -96,8 +96,15 @@ public class Enemy : MonoBehaviour
             //ScoreManager sm = goSM.GetComponent<ScoreManager>();
             //// 가져온 컴포넌트가 가지고 있는 AddScore 함수를 실행.
             //sm.AddScore(10);
-            ScoreManager.instance.CurrScore = 10;
-      
+            ScoreManager.instance.CurrScore = 10;      
+        }
+        // 부딪힌 놈이 플레이어라면
+        else if(other.gameObject.name.Contains("Player"))
+        {
+            // HPSystem 컴포넌트 가져오자.
+            HPSystem hp = other.GetComponent<HPSystem>();
+            // 가져온 컴포넌트의 UpdateHP 함수 실행
+            hp.UpdateHP(-2);
         }
         // 그렇지 않고 만약에 부딪힌 오브젝트의 이름이 DestroyZone 을 포함하고 있지 않다면
         else if (other.gameObject.name.Contains("Destroy") == false)

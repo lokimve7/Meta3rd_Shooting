@@ -113,9 +113,15 @@ public class Enemy : MonoBehaviour
         
             Destroy(other.gameObject);
         }
-        
-       
-        // 나를 없애자
-        Destroy(gameObject);
+
+
+        // 나의 HP 를 줄이자
+        // HPSystem 컴포넌트 가져오자.
+        HPSystem myHP = GetComponent<HPSystem>();
+        // 가져온 컴포넌트에서 UpdateHP 함수를 호출
+        myHP.UpdateHP(-1);
+
+        //// 나를 없애자
+        //Destroy(gameObject);
     }    
 }

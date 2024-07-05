@@ -19,7 +19,10 @@ public class HPSystem : MonoBehaviour
     }
     void Update()
     {
-        
+        // HP bar 를 갱신하자.
+        // 0 ~ 1
+        //hpBar.fillAmount = currHP / maxHP;
+        hpBar.fillAmount = Mathf.Lerp(hpBar.fillAmount, currHP / maxHP, 10 * Time.deltaTime);
     }
 
     // 현재 HP 를 증감하는 함수
@@ -27,9 +30,7 @@ public class HPSystem : MonoBehaviour
     {
         // 현재 HP value 더하자.
         currHP += value;
-        // HP bar 를 갱신하자.
-        // 0 ~ 1
-        hpBar.fillAmount = currHP / maxHP;
+        
         // 현재 HP 가 0이면
         if(currHP <= 0)
         {

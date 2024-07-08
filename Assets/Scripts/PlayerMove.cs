@@ -80,8 +80,6 @@ public class PlayerMove : MonoBehaviour
             transform.position -= dir * moveSpeed * Time.deltaTime;
         }
 
-        
-
     }
 
     // 게임오브젝트가 파괴될 때 호출되는 함수

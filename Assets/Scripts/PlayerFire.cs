@@ -21,24 +21,6 @@ public class PlayerFire : MonoBehaviour
 
     void Start()
     {
-        #region List 사용법
-        // 리스트 변수 생성
-        List<string> listStr = new List<string>();
-
-        // 추가
-        listStr.Add("one"); //0
-        listStr.Add("two"); //1
-
-        print(listStr[1]);
-
-        // 삽입
-        listStr.Insert(1, "1.5");   // one, 1.5, two
-
-        // 삭제
-        listStr.Remove("one");      // 1.5, two
-        listStr.RemoveAt(1);        // 1.5
-        #endregion
-
         // 총알 6개 만들자
         for (int i = 0; i < initBulletCnt; i++)
         {
@@ -49,9 +31,7 @@ public class PlayerFire : MonoBehaviour
 
             // 총알을 탄창에 넣자
             magazine.Add(bullet);            
-        }
-
-            
+        }            
     }
 
     // 현재시간
@@ -67,6 +47,8 @@ public class PlayerFire : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.currGameSate == GameState.Ready) return;
+
         //// 1. 마우스 왼쪽버튼을 누르면 
         //// bool isClick = Input.GetButtonDown("Fire1");
         if(Input.GetButtonDown("Fire1"))

@@ -60,26 +60,36 @@ public class PlayerMove : MonoBehaviour
         //transform.Translate(dir * moveSpeed * Time.deltaTime);
         // 이동 공식 (P = P0 + vt)
         //transform.position = transform.position + dir * moveSpeed * Time.deltaTime;
-        transform.position += dir * moveSpeed * Time.deltaTime;
+        Vector3 pos = transform.position;
+
+        pos += dir * moveSpeed * Time.deltaTime;
 
         // 1. 오른쪽으로 이동하고싶다.
         // transform.Translate(Vector3.right * 5 * Time.deltaTime); 
         #endregion
 
         // 화면 밖으로 나가지 못하게 하자.
-        // 나의 위치값을 viewport 값으로 변환하자.
-        Vector3 viewPortPoint = Camera.main.WorldToViewportPoint(transform.position);
-
-        // 만약에 viewPortPoint.x 의 값이 0보다 작으면 -- 왼쪽
-        // 만약에 viewPortPoint.x 의 값이 1보다 크면   -- 오른쪽        
-        // 만약에 viewPortPoint.y 의 값이 0보다 작으면 -- 아래쪽
-        // 만약에 viewPortPoint.y 의 값이 1보다 크면   -- 위쪽
-        if (viewPortPoint.x < 0 || viewPortPoint.x > 1 || viewPortPoint.y < 0 || viewPortPoint.y > 1)
+        // 나의 위치에서 왼쪽 상단
+        Vector3 leftTop = Camera.main.WorldToViewportPoint(pos + new Vector3(-0.75f, 0.75f));
+        // 나의 위치에서 오른쪽 하단
+        Vector3 rightBottom = Camera.main.WorldToViewportPoint(pos + new Vector3(0.75f, -0.75f));
+        
+        // 왼쪽, 오른쪽 체크해서 좌우로 움직이지 못하게 하자. 
+        if(leftTop.x < 0 || rightBottom.x > 1)
         {
-            // 이동한 만큼 되돌리자
-            transform.position -= dir * moveSpeed * Time.deltaTime;
+            dir.x = 0;
+        }
+        // 위, 아래 체크해서 위아래로 움직이지 못하게 하자.
+        if(rightBottom.y < 0 || leftTop.y > 1)
+        {
+            dir.y = 0;
         }
 
+        // dir의 크기를 1로 바꾸자.
+        dir.Normalize();
+
+        // dir 방향으로 움직이자.
+        transform.position += dir * moveSpeed * Time.deltaTime;
     }
 
     // 게임오브젝트가 파괴될 때 호출되는 함수

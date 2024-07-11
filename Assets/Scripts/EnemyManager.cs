@@ -20,7 +20,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     void Update()
-    {
+    {        
         // 현재 게임중이 아니라면 함수를 나가자.
         if (GameManager.instance.isPlaying == false) return;
 

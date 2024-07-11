@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     // 현재 게임이 시작 되었는지
     public bool isPlaying = false;
 
+    // 이전 second 값
+    int lastSecond = 0;
+
     private void Awake()
     {
         // 만약에 instance 에 값이 없다면
@@ -44,7 +47,7 @@ public class GameManager : MonoBehaviour
     }
 
     void CountDown()
-    {
+    {   
         // 게임중이라면 함수를 나가자.
         if (isPlaying) return;
 
@@ -53,9 +56,28 @@ public class GameManager : MonoBehaviour
         // 2. 흐른시간을 countDown 에 셋팅하자.
         int second = (int)(4 - currTime);
 
+        // 만약에 second 가 lastSecond 와 다르다면
+        if(second != lastSecond)
+        {
+            // countDown.gameObjec 크기를 1.5 로 하자.
+            countDown.transform.localScale = Vector3.one * 2f;
+
+            // iTween 을 이용해서 움직임을 주자.
+            Hashtable hash = iTween.Hash(
+                "scale", Vector3.one,
+                "time", 0.5f,
+                "easetype", iTween.EaseType.easeOutBounce,
+                "oncompletetarget", gameObject,
+                "oncomplete", nameof(OnComplete));
+            iTween.ScaleTo(countDown.gameObject, hash);
+            // lastSecond 를 second 로 갱신
+            lastSecond = second;
+        }
+
+
         // 만약에 second 가 0보다 크다면
         if (second > 0)
-        {
+        {           
             // second 값을 보여주자.
             countDown.text = second.ToString();
         }
@@ -74,5 +96,10 @@ public class GameManager : MonoBehaviour
             //게임 중으로 설정하자.
             isPlaying = true;
         }
+    }
+
+    void OnComplete()
+    {
+        print("점먹으러 갑시다!!!");
     }
 }

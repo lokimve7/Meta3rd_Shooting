@@ -402,7 +402,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.9267942, y: 0.82879215, z: 0.648795}
   m_Center: {x: 0.004885137, y: -0.080455095, z: -0.012448728}
@@ -1819,6 +1819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countDown: {fileID: 617483560}
+  isPlaying: 0
 --- !u!1 &1767732700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2281,7 +2282,7 @@ GameObject:
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1998680747
 Transform:
   m_ObjectHideFlags: 0

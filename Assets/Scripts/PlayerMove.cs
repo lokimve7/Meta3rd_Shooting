@@ -26,6 +26,9 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        // 현재 게임중이 아니라면 함수를 나가자.
+        if (GameManager.instance.isPlaying == false) return;
+
         #region 회전 시켜서 나의 윗방향으로 움직이기
         //// a, d 키 입력을 받아서 회전 하자.
         //float h = Input.GetAxis("Horizontal");

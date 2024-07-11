@@ -21,6 +21,9 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
+        // 현재 게임중이 아니라면 함수를 나가자.
+        if (GameManager.instance.isPlaying == false) return;
+
         // 시간을 흐르게 하자(DeltaTime 누적)
         currTime += Time.deltaTime;
 

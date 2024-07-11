@@ -67,9 +67,12 @@ public class PlayerFire : MonoBehaviour
 
     void Update()
     {
+        // 현재 게임중이 아니라면 함수를 나가자.
+        if (GameManager.instance.isPlaying == false) return;
+
         //// 1. 마우스 왼쪽버튼을 누르면 
         //// bool isClick = Input.GetButtonDown("Fire1");
-        if(Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         ////if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftControl))
         
         // 0.5초 마다 한번씩 총알 발사하고 싶다.

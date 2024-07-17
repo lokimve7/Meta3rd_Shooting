@@ -110,8 +110,9 @@ public class PlayerFire : MonoBehaviour
         //Bullet bulletComp = bullet.GetComponent<Bullet>();
         //// 가져온 컴포넌트로 PlaySound 함수 실행
         //bulletComp.PlaySound();
-        AudioSource audioSource = GetComponent<AudioSource>();
-        audioSource.PlayOneShot(audioSource.clip);
+        //AudioSource audioSource = GetComponent<AudioSource>();
+        //audioSource.PlayOneShot(audioSource.clip);
+        SoundManager.instance.PlayEftSound(0);
     }
 
     // 360 방향으로 발사되는 총알 생성하는 함수

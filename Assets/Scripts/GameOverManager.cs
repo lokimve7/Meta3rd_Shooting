@@ -8,7 +8,8 @@ public class GameOverManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // 게임오버 BGM 플레이
+        SoundManager.instance.PlayBgmSound(SoundManager.EBgmType.BGM_RESULT);
     }
 
     // Update is called once per frame

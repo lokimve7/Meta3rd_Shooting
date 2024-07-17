@@ -9,7 +9,7 @@ public class GameOverManager : MonoBehaviour
     void Start()
     {
         // 게임오버 BGM 플레이
-        SoundManager.instance.PlayBgmSound(SoundManager.EBgmType.BGM_RESULT);
+        SoundManager.Get().PlayBgmSound(SoundManager.EBgmType.BGM_RESULT);
     }
 
     // Update is called once per frame

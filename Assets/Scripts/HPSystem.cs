@@ -35,7 +35,7 @@ public class HPSystem : MonoBehaviour
         if(currHP <= 0)
         {
             // 파괴되는 효과음
-            SoundManager.instance.PlayEftSound(SoundManager.ESoundType.EFT_DESTORY);
+            SoundManager.Get().PlayEftSound(SoundManager.ESoundType.EFT_DESTORY);
 
             // 파괴하자.
             Destroy(gameObject);

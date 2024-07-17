@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
             //게임 중으로 설정하자.
             isPlaying = true;
             //인게임 bgm 플레이
-            SoundManager.instance.PlayBgmSound(SoundManager.EBgmType.BGM_INGAME);
+            SoundManager.Get().PlayBgmSound(SoundManager.EBgmType.BGM_INGAME);
         }
     }
 

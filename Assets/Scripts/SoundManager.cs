@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -21,8 +22,24 @@ public class SoundManager : MonoBehaviour
         BGM_RESULT
     }
 
+   
+
     // 나를 담을 static 변수
-    public static SoundManager instance;
+    static SoundManager instance;
+    public static SoundManager Get()
+    {
+        // 만약에 instance 가 null 이라면
+        if(instance == null)
+        {
+            // SoundManager Prefab 을 읽어오자
+            GameObject soundManagerFactory = Resources.Load<GameObject>("SoundManager");
+            // SoundManager 공장에서 SoundManager를 만들자.
+            GameObject soundManager = Instantiate(soundManagerFactory);           
+        }
+
+        return instance;
+    }
+   
 
     // audiosource
     public AudioSource eftAudio;
@@ -41,6 +58,8 @@ public class SoundManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
+            // 씬 전환이 되도 게임오브젝트를 파괴하고 싶지않다.
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -73,6 +92,18 @@ public class SoundManager : MonoBehaviour
         bgmAudio.clip = bgmAudios[bgmIdx];
         // 플레이!
         bgmAudio.Play();
+    }
+
+    public void AudioSourceEtc()
+    {
+        // 일시정지
+        bgmAudio.Pause();
+        // 완전 멈춤
+        bgmAudio.Stop();
+        // 현재 실행되고있는 시간
+        float currTime = bgmAudio.time;
+
+        bgmAudio.time += 10;
     }
  
 }
